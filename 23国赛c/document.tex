@@ -1,0 +1,77 @@
+\documentclass[withoutpreface,bwprint]{cumcmthesis} %去掉封面与编号页
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage{url}   % 网页链接
+\usepackage{subcaption} % 子标题、
+\usepackage{graphicx}
+\title{“信息引航者”——基于MGCA的新闻推荐系统}
+\usepackage{listings}
+\lstset{language=Matlab}
+\usepackage{pythonhighlight}
+\usepackage{setspace}
+\begin{document}
+	
+	\maketitle\thispagestyle{empty}
+	\begin{abstract}
+		信息技术不断发展，互联网上存在着大量信息，通过小红书、今日头条、bilibili等互联网平台获取信息是主要的信息获取途径之一。随着互联网上信息的越来越多，想要在海量信息中获取我们感兴趣或有需求的信息愈加困难。\par
+		推荐系统的出现正是为了解决这种“信息过载”的问题。推荐系统已在互联网中得到了广泛的应用，并给应用它的企业带来了丰厚的利润。推荐系统给亚马逊带来了35\%的销售收入，给Netflix带来了高达75\%的消费，并且Youtube主页上60\%的浏览来自推荐服务。有关推荐系统的研究具有十分深远的意义与巨大的实用价值。\par
+		
+	\end{abstract}
+	\setcounter{page}{1}
+	\tableofcontents
+	\newpage
+	\section{引言}
+	\subsection{研究背景及意义}
+	\subsubsection{ “信息过载”问题的解决迫在眉睫}    
+	\subsubsection{ 互联网与推荐系统的融合带来巨大的经济价值}
+	\subsection{相关研究现状}
+	\subsubsection{ 推荐系统在工业界的应用现状}
+	\subsubsection{ 推荐系统在学术界的研究现状}
+	\subsection{项目架构总览}
+	\subsubsection{ 项目整体框架}
+	\subsubsection{ 项目优势与创新性}
+	\newpage
+	\section{模型技术路线及实现方案}
+	\subsection{方法介绍}
+	\subsubsection{ 图神经网络}
+	\subsubsection{ 注意力机制}
+	\subsubsection{ Transformer}
+	\subsubsection{ Fastformer}
+	\subsection{模型架构}
+	\subsubsection{ 总体架构}
+	\subsubsection{ 候选新闻编码}
+	\subsubsection{ 单词粒度感知候选新闻}
+	\subsubsection{ 新闻粒度感知候选新闻}
+	\subsubsection{ 实体粒度感知候选新闻}
+	\subsection{模型评估}
+	\subsubsection{ 与之前模型的性能对比}
+	\subsubsection{ 消融实验}
+	\newpage
+	\section{软件工程与开发架构方案}
+	\subsection{开发工具与框架}
+	\subsection{新闻推荐系统软件落地示例}
+	\subsubsection{ 软件周期模型}
+	\subsubsection{ 软件开发模型}
+	\subsubsection{ 数据库设计}
+	\subsubsection{ UML设计}
+	\subsubsection{ 软件功能演示}
+	\subsubsection{ 兼容性测试与稳定性测试}
+	$\bigstar$可执行测试：分别部署到不同性能的电脑上运行测试，均成功运行，网页反馈
+	均在35ms到45ms左右，不存在延迟和卡顿现象，该系统对电脑的配置要求较低。\par
+	$\bigstar$功能测试：所有功能均可正常运行使用，可视化动态大屏显示正常，首页展示
+	效果正常，查询功能正常，链接页面跳转正常。\par
+	$\bigstar$兼容测试：在 Windows、Linux、Mac等操作系统可以正常访问。谷歌浏览器、
+	火狐浏览器、QQ 浏览器、360 浏览器等运行均正常。Windows操作系统的python版
+	本为3.6以上、tensorflow2.14.0 版本环境可以正常运行平台。\par
+	$\bigstar$安全测试：本项目采取的是 https 协议，安全性和可靠性比较高，jupyter 环境
+	提供了三种安全级服务配置，可以按照实际的需求提升安全等级。\par
+	\newpage
+	\section{商业模式构建与经营管理}
+	\subsection{市场竞争分析}
+	\subsection{投资回报分析}
+	\subsection{盈利方式}
+	\subsubsection{ 提供整套低耦合工业界解决方案}
+	\subsubsection{ 提供整套成熟软件系统}
+	\subsection{财务管理}
+	\subsection{营销战略}
+	
+\end{document}
