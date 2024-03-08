@@ -149,7 +149,7 @@
 	\subsubsection{ 候选新闻编码}
 	\textbf{新闻编码器 } 
 	为了区分候选新闻和用户点击新闻，我们在候选新闻的相关表示中添加了上标 "c"。
-	我们首先将候选新闻文本 $T_i^c$ 中的每个单词 $t^c_{ij}$ 映射到一个 $d_w$ 维的向量 $mathbf{t}_{ij}^c \ in \mathbb{R}^{d_w}$，其中 $d_w$ 是向量维度。因此，文本 $T_i^c$ 可以表示为一个特征图 $\mathbf{T}_i^c = [\mathbf{t}_{i1}^c; \mathbf{t}_{i2}^c; \dots; \mathbf{t}_{il}^c]$，其中 $\mathbf{T}_i^c \ in \mathbb{R}^{l \times d_w}$ 。
+	我们首先将候选新闻文本 $T_i^c$ 中的每个单词 $t^c_{ij}$ 映射到一个 $d_w$ 维的向量 $\mathbf{t}_{ij}^c \in \mathbb{R}^{d_w}$，其中 $d_w$ 是向量维度。因此，文本 $T_i^c$ 可以表示为一个特征图 $\mathbf{T}_i^c = [\mathbf{t}_{i1}^c; \mathbf{t}_{i2}^c; \dots; \mathbf{t}_{il}^c]$，其中 $\mathbf{T}_i^c \in \mathbb{R}^{l \times d_w}$ 。
 	Transformer机制基于自注意机制，该机制允许模型权衡序列中不同单词的重要性。它取代了传统的递归神经网络（RNN），在捕捉词与词之间错综复杂的语义和句法关系方面表现出了卓越的性能。因此，我们采用 Transformer 对不同类型的文本信息进行建模。如图所示，第 \textit{i}种类型文本信息的上下文词语的表示 $\hat{\mathbf{T}}_i^c$ 可以表示如下：
 	
 	\begin{equation}\label{eta}
@@ -159,11 +159,11 @@
 	\end{split}
 	\end{equation}\label{eta}
 	其中 $\hat{\mathbf{T}}^{c}_i \in \mathbb{R}^{l \times d_w}$, 
-	第 $i$-th 个候选新闻文本 $T_i^c$ 的高级特征向量通过软注意力机制生成: 
+	第 $i$ 个候选新闻文本 $T_i^c$ 的高级特征向量通过软注意力机制生成: 
 	\begin{equation}
 	\hat{\mathbf{t}^c_i} = softmax( \mathbf{W} \cdot \mathbf{(\hat{\mathbf{T}}^c_i})^{T} + \mathbf{b}) \cdot \mathbf{\hat{\mathbf{T}}^c_i}
 	\end{equation}
-	其中，$\hat{mathbf{t}}^c_i \in \mathbb{R}^{d_w}$, $\mathbf{W}$ 表示可训练的权重矩阵，$\mathbf{b}$ 表示偏差项。
+	其中，$\hat{\mathbf{t}}^c_i \in \mathbb{R}^{d_w}$, $\mathbf{W}$ 表示可训练的权重矩阵，$\mathbf{b}$ 表示偏差项。
 	所有新闻文本的表示被连接起来作为候选新闻的文本表示：
 	\begin{equation}\label{eta}
 	\mathbf{d}^c= \hat{\mathbf{t}}_1^c \oplus \hat{\mathbf{t}}_2^c \oplus \ldots \oplus \hat{\mathbf{t}}_k^c
@@ -172,11 +172,12 @@
 	\textbf{知识协同编码器 }
 	该编码器旨在借助知识图谱，从用户点击新闻和候选新闻中的实体 $\mathbf{E}^{u} =[E^u_1;E^u_2;\dots;E^u_m] $ 和 $\mathbf{E}^{c} = [E^c_1;E^c_2;\dots;E^c_n] $ 之间的相关性出发，更好地表示这些新闻，以便进行兴趣匹配。该机制包含三个部分。首先，为了总结每个实体或其邻居在跳数范围内的信息，它首先利用图注意（GAT）网络堆叠层来学习它们的表示，分别表示为 $\mathbf{M}_u \in \mathbb{R}^{d_e \times D}$和 $\mathbf{M}_c \in \mathbb{R}^{d_e \times D}$，其中 D 是点击新闻和候选新闻中实体的数量。
 	
-	其次是堆叠图共注意力（GCAT）网络。一般来说，一个实体通常与知识图谱上的多个实体具有丰富的关联性。而且，实体间的相关性通常会提供不同的信息用以建模点击新闻和候选新闻之间的相关性，从而进行兴趣匹配。为了更好地选择实体间信息的相关性来匹配用户感兴趣的候选新闻，我们提出了一种堆叠了 K 层的图协同关注网络（GCAT）来学习新闻 $ {n}^{u}$ 和 ${n} ^ {c} $ 中实体的匹配感知表示。以新闻 $ {n}^{u} $ 和 $l$-th 图共注意力网络中的实体 e 为例，我们首先将多头自注意力网络应用于由 $l-1$-th GCAT 网络生成的其相邻实体的表征，以建模不同相邻实体之间的相关性。接下来，我们提出了一个匹配感知注意力网络，根据实体e与新闻${n}^{c}$中实体的相关性来聚合实体e的邻居实体，相关性矩阵$ \mathbf{I}_u \in \mathbb{R}^{D \times B} $：
+	其次是堆叠图共注意力（GCAT）网络。一般来说，一个实体通常与知识图谱上的多个实体具有丰富的关联性。而且，实体间的相关性通常会提供不同的信息用以建模点击新闻和候选新闻之间的相关性，从而进行兴趣匹配。为了更好地选择实体间信息的相关性来匹配用户感兴趣的候选新闻，我们提出了一种堆叠了 K 层的图协同关注网络（GCAT）来学习新闻 $ {n}^{u}$ 和 ${n} ^ {c} $ 中实体的匹配感知表示。以新闻 $ {n}^{u} $ 和 $l$-th 图共注意力网络中的实体 e 为例，我们首先将多头自注意力网络应用于由第 $l-1$ 个 GCAT 网络生成的其相邻实体的表征，以建模不同相邻实体之间的相关性。接下来，我们提出了一个匹配感知注意力网络，根据实体e与新闻${n}^{c}$中实体的相关性来聚合实体e的邻居实体，相关性矩阵$ \mathbf{I}_u \in \mathbb{R}^{D \times B} $：
 	\begin{equation}
 	\mathbf{I}_u = \mathbf{M^T_c} \mathbf{W^c_c} \hat{\mathbf{G}_l}
 	\end{equation}
-	其中 $hat{mathbf{G}_l} \in \mathbb{R}^{d_e \times B}$表示自注意力网络生成的邻居实体的表示，B 表示邻居的数量，$\mathbf{W}^c_c$是可训练的权重。邻居实体的注意力向量 $\mathbf{v}^{u} \ in \mathbb{R}_B $ 的计算公式为：
+	其中 $\hat{\mathbf{G}_l} \in \mathbb{R}^{d_e \times
+	B}$表示自注意力网络生成的邻居实体的表示，B 表示邻居的数量，$\mathbf{W}^c_c$是可训练的权重。邻居实体的注意力向量 $\mathbf{v}^{u} \in \mathbb{R}_B $ 的计算公式为：
 	\begin{equation}
 	\mathbf{v}^{u} = \mathbf{q}^T_e \cdot tanh(\mathbf{W}^c_s \hat{\mathbf{G}^{l}} + \mathbf{W}^c_h \mathbf{M}_c f(\mathbf{I}_u) ), 
 	\end{equation}
@@ -186,35 +187,34 @@
 	\hat{\mathbf{g}^{l}} = \sum_{i=1}^{B}\mathbf{\lambda}^u_i\hat{\mathbf{g}^l_i},{~~~~~~~~}      
 	\mathbf{\lambda}^u_i = \frac{exp(\mathbf{v}^u_i)}{\sum_{j=1}^{B}exp(\mathbf{v}^u_j)}
 	\end{equation}
-	其中，$mathbf{v}^u_i$ 是向量$v^u$ 的第 i 个元素，而
-	$mathbf{v}^u_i$为向量$v^u$的第 i 个元素，$mathbf{lambda}^u_i$为第 i 个邻居实体的注意力权重。最后，第 l 个 GCAT 网络生成的实体 e 的表示$g^l$为：$g^l = \mathbf{P}_e[\hat{\mathbf{g}^{l}};\hat{\mathbf{g}}^{l-1}]$，其中，$P_e/in \mathbb{R}^{d_e/times2d_e}$为投影矩阵。采用这种方法，堆叠了 K 层的 GCAT 网络就可以通过捕捉 K 跳内的邻居与候选新闻中的实体之间的相关性，为用户点击新闻中的实体学习匹配感知表示 $S_u \in \mathbb{R}^{d_e \times D}$。 以类似的方式，我们可以通过候选新闻中实体的邻居与点击新闻中实体之间的相关性来学习候选新闻中实体的匹配感知表示 $S_c \in \mathbb{R}^{d_e \times D}$。
+	其中，$\mathbf{v}^u_i$ 是向量$v^u$ 的第 i 个元素，$\mathbf{\lambda}^u_i$为第 i 个邻居实体的注意力权重。第 $l$ 个 GCAT 网络生成的实体 e 的表示$g^l$为：$g^l = \mathbf{P}_e[\hat{\mathbf{g}^{l}};\hat{\mathbf{g}}^{l-1}]$，其中，$P_e\in \mathbb{R}^{d_e\times2d_e}$为投影矩阵。采用这种方法，堆叠了 K 层的 GCAT 网络就可以通过捕捉 K 跳内的邻居与候选新闻中的实体之间的相关性，为用户点击新闻中的实体学习匹配感知表示 $S_u \in \mathbb{R}^{d_e \times D}$。 以类似的方式，我们可以通过候选新闻中实体的邻居与点击新闻中实体之间的相关性来学习候选新闻中实体的匹配感知表示 $S_c \in \mathbb{R}^{d_e \times D}$。
 	
 	第三个是实体共同注意力网络。点击新闻和候选新闻中的实体通常具有不同的信息用于兴趣匹配。
 	我们应用实体共同注意力网络，通过捕捉实体之间的相关性，交互式地学习新闻 $n^u$ 和 $n^c$ 的知识型表示。具体来说
-	首先，我们计算一个亲和矩阵（affinity matrix）来衡量新闻 $n^u$ 和 $n^c$ 中实体之间的相关性：
+	首先，我们计算一个亲和矩阵来衡量新闻 $n^u$ 和 $n^c$ 中实体之间的相关性：
 	\begin{equation}
 	\mathbf{C}_e = \mathbf{S}^T_c\mathbf{W}^K_c\mathbf{S}_u,
 	\end{equation}
-	其中 $\mathbf{W}^c_k \in \mathbb{R}^{d_e \times d_e}$是权重矩阵。接下来我们计算新闻 $n^u$ 和 $n^c$ 中实体的注意力向量 $a^u,a^c \in \mathbb{R}^{D}$，并且将矩阵 $C_e$ 和 $C^e_T$ 作为相关矩阵，计算点击新闻和候选新闻中基于知识的表示 $u_e \in \mathbb{R}^{d_e}$ 和 $c_e \in \mathbb{R}^{d_e}$ and it can be calculate as Equations (5) and (6).we fuse the candidate news textual and entities representations as the candidate news representation，它可以通过公式（5）和（6）进行计算。我们将候选新闻的文本表征和实体表征融合为候选新闻表征：
+	其中 $\mathbf{W}^c_k \in \mathbb{R}^{d_e \times d_e}$是权重矩阵。接下来我们计算新闻 $n^u$ 和 $n^c$ 中实体的注意力向量 $a^u,a^c \in \mathbb{R}^{D}$，并且将矩阵 $C_e$ 和 $C^e_T$ 作为相关矩阵，计算点击新闻和候选新闻中基于知识的表示 $u_e \in \mathbb{R}^{d_e}$ 和 $c_e \in \mathbb{R}^{d_e}$ ，它可以通过公式（5）和（6）进行计算。我们将候选新闻的文本表征和实体表征融合为候选新闻表征：
 	\begin{equation}
 	\mathbf{n^c}=\mathbf{d}^c \oplus \mathbf{c_e}
 	\end{equation}
 	其中，$\mathbf{n^c \in \mathbb{R}^{kd_w+D}}$, 获取的候选新闻表示将后续阶段将用于进行用户兴趣建模和匹配。
 	\subsubsection{ 单词粒度感知候选新闻}
 	本部分旨在将候选新闻特征纳入用户点击历史新闻词级表示中。
-	具体来说，将 第$i$ 个新闻文本 $T_i$ 中的每个单词 $t_{ij}$ 映射为一个 $d_w$ 维向量 $\mathbf{t}_{ij}\ in \mathbb{R}^{d_w}$，我们就可以得到表示矩阵  $T_i$ ： $\mathbf{T}_i = [\mathbf{t}_{i1}; \mathbf{t}_{i2}; \dots; \mathbf{t}_{il}]$，其中 $\mathbf{T}_i 在 \mathbb{R}^{l 次 d_w}$ 。
-	不同类型的新闻文本通常具有不同的语义特征，这对新闻语义理解非常重要。 因此，用户点击新闻的表示矩阵被堆叠成一个总矩阵 $\mathbf{T}$：$\mathbf{T} =[\mathbf{T} _1^1;\ldots;\mathbf{T} _k^1;\ldots;\mathbf{T} _1^m;\ldots;\mathbf{T} _k^m]$、其中 $\mathbf{T} \in \mathbb{R}^{mkl \times d_w}$, $\mathbf{T}_j^i$ 是 $i$-th 点击新闻 $c_i$ 的 $i$-th 新闻文本嵌入矩阵。为方便起见，我们将 $\mathbf{T}$ 重写如下：
+	具体来说，将 第$i$ 个新闻文本 $T_i$ 中的每个单词 $t_{ij}$ 映射为一个 $d_w$ 维向量 $\mathbf{t}_{ij} \in \mathbb{R}^{d_w}$，我们就可以得到表示矩阵  $T_i$ ： $\mathbf{T}_i = [\mathbf{t}_{i1}; \mathbf{t}_{i2}; \dots; \mathbf{t}_{il}]$，其中 $\mathbf{T}_i \in \mathbb{R}^{l \times d_w}$ 。
+	不同类型的新闻文本通常具有不同的语义特征，这对新闻语义理解非常重要。 因此，用户点击新闻的表示矩阵被堆叠成一个总矩阵 $\mathbf{T}$：$\mathbf{T} =[\mathbf{T} _1^1;\ldots;\mathbf{T} _k^1;\ldots;\mathbf{T} _1^m;\ldots;\mathbf{T} _k^m]$、其中 $\mathbf{T} \in \mathbb{R}^{mkl \times d_w}$, $\mathbf{T}_j^i$ 是第 $i$  个点击新闻 $c_i$ 的第 $j$ 个新闻文本嵌入矩阵。为方便起见，我们将 $\mathbf{T}$ 重写如下：
 	\begin{equation}
 	\mathbf{G} = [\mathbf{g}_1; \mathbf{g}_2, \dots, \mathbf{g}_L],~~ \mathbf{G} \in \mathbb{R}^{L\times d_w},~~L = mkl
 	\end{equation}
-	其中，$\mathbf{g}_i$ 是点击新闻整体序列的第 i 个单词表示向量。
+	其中，$\mathbf{g}_i$ 是点击新闻整体序列的第 $i$ 个单词表示向量。
 	尽管Transformer网络被公认为是一种强大的文档建模方法，但由于其二次方的复杂度，它在处理长文档时的效率大打折扣。受此启发，我们采用了 Fastformer（一种 SOTA 高效transformer网络）来对用户点击的长新闻进行单词级行为交互建模。 Fastformer 的核心组件是加性注意力机制，它能够在线性复杂度下实现有效的上下文建模。为了有效地学习候选新闻与点击新闻在单词层面的交互，我们设置每个词头的查询（$\mathbf{q}_i$）、关键字（$\mathbf{k}_i$）和值（$\mathbf{v}_i$）计算如下：	
 	\begin{equation}
 	\mathbf{q}_i = W^w_q(\mathbf{g}_i \oplus \mathbf{n^c}),~~
 	\mathbf{k}_i = W^w_k\mathbf{g}_i,~~
 	\mathbf{v}_i = W^w_v\mathbf{g}_i
 	\end{equation}
-	其中，$W^w_q$、$W^w_k$、$W^w_v$ 表示可训练的投影参数矩阵。候选新闻感知表示 $hat{\mathbf{g}}_i$ 的计算方法如下：
+	其中，$W^w_q$、$W^w_k$、$W^w_v$ 表示可训练的投影参数矩阵。候选新闻感知表示 $\hat{\mathbf{g}}_i$ 的计算方法如下：
 	% Each query incorporate the candidate news information, which can guide the model learn the important information. 
 	\begin{equation}\label{wcan}
 	\begin{split}
@@ -232,7 +232,7 @@
 	该机制旨在通过将候选新闻纳入实体表征来为用户兴趣建模。我们首先得到所有点击新闻和候选新闻的知识增强实体表示 $\mathbf{E}^{u} = [E^u_1;E^u_2;\dots;E^u_m] $ 和 $\mathbf{E}^{c} = [E^c_1;E^c_2;\dots;E^c_n] $。m 和 n 是点击新闻和候选新闻的数量。然后，我们使用知识感知新闻协同编码器（Knowledge-aware News Co-Encoder）获得实体级用户兴趣表示 $\mathbf{u}_e $.
 	\subsubsection{ 新闻粒度感知候选新闻}
 	在这一部分 
-	我们首先通过新闻编码器获取点击新闻的表示$\mathbf{d}=[\mathbf{d}_1, \mathbf{d}_2,\dots,\mathbf{d}_m]$，其中$\mathbf{d}_i \in \mathbb{R}^{kd_w}$表示第i个用户点击新闻的向量表示。
+	我们首先通过新闻编码器获取点击新闻的表示$\mathbf{d}=[\mathbf{d}_1, \mathbf{d}_2,\dots,\mathbf{d}_m]$，其中$\mathbf{d}_i \in \mathbb{R}^{kd_w}$表示第$i$个用户点击新闻的向量表示。
 	然后，利用Transformer从用户点击的新闻中捕捉交互信息。
 	多头自注意力机制单元是 Transformer 的主要组成部分。
 	与传统 Transformer 不同，对于多头自关注机制中的每个头，我们设置查询、键和值如下：
@@ -240,7 +240,7 @@
 	\mathbf{q}_{i} = \mathrm{ReLU}((\mathbf{d}_i \oplus \mathbf{n}^c) \cdot W^n_q),~ \mathbf{k}_{i} = \mathrm{ReLU}(\mathbf{d}_i \cdot W^n_k),~
 	\mathbf{v}_{i} = \mathrm{ReLU}(\mathbf{d}_i \cdot W^n_v)
 	\end{equation}
-	其中，$W^n_q$、$W^n_k$ 和 $W^n_v$ 分别是查询、键和值的可学习权重矩阵。对于每条新闻 $c_i$，自注意力机制会学习一组权重 $\beta_i = \{\beta_{i1}，\beta_{i2}，\dots，\beta_{im}\}$，用于衡量所有被点击的新闻 \{$c_1$，$c_2$，$\dots$，$c_m$\}回答查询 $\mathbf{q}_i$ 的程度:
+	其中，$W^n_q$、$W^n_k$ 和 $W^n_v$ 分别是查询、键和值的可学习权重矩阵。对于每条新闻 $c_i$，自注意力机制会学习一组权重 $\beta_i = \{\beta_{i1}, \beta_{i2}, \dots, \beta_{im}\}$，用于衡量所有被点击的新闻 \{$c_1$，$c_2$，$\dots$，$c_m$\}回答查询 $\mathbf{q}_i$ 的程度:
 	\begin{equation}
 	\beta_{ij} = \frac{q_ik_j}{\sum_{j'}exp(q_ik_{j'})}
 	\end{equation}
@@ -258,12 +258,8 @@
 	\begin{equation}
 	\mathbf{u} = [\mathbf{u}_w; \mathbf{u}_e; \mathbf{u}_n]
 	\end{equation}
-	沿袭前人的研究成果，我们采用候选新闻感知用户表示 $\mathbf{u}$ 和候选新闻表示 $\mathbf{n}^c$ 的点积来衡量用户兴趣和候选新闻的相关性： $\hat{y} = \mathbf{u}^T \cdot \mathbf{n}^c$。
-
-	然后根据匹配分数 $\hat{y}$ 对候选新闻进行排序，以推荐新闻。
-	
-	接下来我们将介绍为实现所提方法而使用的训练方法。我们利用负抽样技术来构建训练数据集 $\mathcal{D}$，其中每个正样本都与从同一新闻中随机抽取的 $\mathcal{S}$ 负样本相关联。
-	我们还应用了 BPR 损失来制定损失函数：
+	沿袭前人的研究成果，我们采用候选新闻感知用户表示 $\mathbf{u}$ 和候选新闻表示 $\mathbf{n}^c$ 的点积来衡量用户兴趣和候选新闻的相关性： $\hat{y} = \mathbf{u}^T \cdot \mathbf{n}^c$。然后根据匹配分数 $\hat{y}$ 对候选新闻进行排序，以推荐新闻。接下来我们将介绍为实现所提方法而使用的训练方法。我们利用负抽样技术来构建训练数据集 $\mathcal{D}$，其中每个正样本都与从同一新闻中随机抽取的 $\mathcal{S}$ 负样本相关联。
+	此外，我们还应用了 BPR 损失来制定损失函数：
 	\begin{equation}\label{eatt}
 	\mathcal{L} =- \frac{1}{|D|}  {\textstyle \sum_{i=1}^{|D|}{\sigma (y_i^c-y_i^n)}}
 	\end{equation}
