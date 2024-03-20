@@ -15,32 +15,32 @@
 \contentsline {subsubsection}{\numberline {2\,.\,1\,.\,2} glove词嵌入}{12}{subsubsection.2.1.2}%
 \contentsline {subsection}{\numberline {2\,.\,2}方法介绍}{12}{subsection.2.2}%
 \contentsline {subsubsection}{\numberline {2\,.\,2\,.\,1} 图神经网络}{12}{subsubsection.2.2.1}%
-\contentsline {subsubsection}{\numberline {2\,.\,2\,.\,2} 注意力机制}{12}{subsubsection.2.2.2}%
-\contentsline {subsubsection}{\numberline {2\,.\,2\,.\,3} Transformer }{12}{subsubsection.2.2.3}%
-\contentsline {subsubsection}{\numberline {2\,.\,2\,.\,4} Fastformer }{14}{subsubsection.2.2.4}%
-\contentsline {subsection}{\numberline {2\,.\,3}模型架构}{15}{subsection.2.3}%
-\contentsline {subsubsection}{\numberline {2\,.\,3\,.\,1} 候选新闻编码}{15}{subsubsection.2.3.1}%
-\contentsline {subsubsection}{\numberline {2\,.\,3\,.\,2} 单词粒度感知候选新闻}{17}{subsubsection.2.3.2}%
-\contentsline {subsubsection}{\numberline {2\,.\,3\,.\,3} 实体粒度感知候选新闻 }{18}{subsubsection.2.3.3}%
-\contentsline {subsubsection}{\numberline {2\,.\,3\,.\,4} 新闻粒度感知候选新闻}{18}{subsubsection.2.3.4}%
-\contentsline {subsection}{\numberline {2\,.\,4}模型评估}{20}{subsection.2.4}%
-\contentsline {subsubsection}{\numberline {2\,.\,4\,.\,1}与之前的模型指标对比}{20}{subsubsection.2.4.1}%
-\contentsline {subsubsection}{\numberline {2\,.\,4\,.\,2}消融实验}{20}{subsubsection.2.4.2}%
-\contentsline {section}{\numberline {三、}软件工程与开发架构方案}{21}{section.3}%
-\contentsline {subsection}{\numberline {3\,.\,1}开发工具与框架}{21}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3\,.\,2}新闻推荐系统软件落地示例}{21}{subsection.3.2}%
-\contentsline {subsubsection}{\numberline {3\,.\,2\,.\,1} 软件周期模型}{21}{subsubsection.3.2.1}%
-\contentsline {subsubsection}{\numberline {3\,.\,2\,.\,2} 软件开发模型}{23}{subsubsection.3.2.2}%
-\contentsline {subsubsection}{\numberline {3\,.\,2\,.\,3} 数据库设计}{25}{subsubsection.3.2.3}%
-\contentsline {subsubsection}{\numberline {3\,.\,2\,.\,4} UML设计}{28}{subsubsection.3.2.4}%
-\contentsline {subsubsection}{\numberline {3\,.\,2\,.\,5} 软件功能演示}{29}{subsubsection.3.2.5}%
-\contentsline {subsubsection}{\numberline {3\,.\,2\,.\,6} 兼容性测试与稳定性测试}{31}{subsubsection.3.2.6}%
-\contentsline {section}{\numberline {四、}商业模式构建与经营管理}{32}{section.4}%
-\contentsline {subsection}{\numberline {4\,.\,1}市场竞争分析（ 按照SWOT分析写，画一个图）}{32}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4\,.\,2}投资回报分析}{32}{subsection.4.2}%
-\contentsline {subsection}{\numberline {4\,.\,3}盈利方式}{32}{subsection.4.3}%
-\contentsline {subsubsection}{\numberline {4\,.\,3\,.\,1} 提供整套低耦合工业界解决方案}{32}{subsubsection.4.3.1}%
-\contentsline {subsubsection}{\numberline {4\,.\,3\,.\,2} 提供整套成熟软件系统}{32}{subsubsection.4.3.2}%
-\contentsline {subsection}{\numberline {4\,.\,4}财务管理}{32}{subsection.4.4}%
-\contentsline {subsection}{\numberline {4\,.\,5}营销战略}{32}{subsection.4.5}%
-\contentsline {section}{参考文献}{33}{section*.31}%
+\contentsline {subsubsection}{\numberline {2\,.\,2\,.\,2} 注意力机制}{13}{subsubsection.2.2.2}%
+\contentsline {subsubsection}{\numberline {2\,.\,2\,.\,3} Transformer }{13}{subsubsection.2.2.3}%
+\contentsline {subsubsection}{\numberline {2\,.\,2\,.\,4} Fastformer }{15}{subsubsection.2.2.4}%
+\contentsline {subsection}{\numberline {2\,.\,3}模型架构}{16}{subsection.2.3}%
+\contentsline {subsubsection}{\numberline {2\,.\,3\,.\,1} 候选新闻编码}{17}{subsubsection.2.3.1}%
+\contentsline {subsubsection}{\numberline {2\,.\,3\,.\,2} 单词粒度感知候选新闻}{19}{subsubsection.2.3.2}%
+\contentsline {subsubsection}{\numberline {2\,.\,3\,.\,3} 实体粒度感知候选新闻 }{19}{subsubsection.2.3.3}%
+\contentsline {subsubsection}{\numberline {2\,.\,3\,.\,4} 新闻粒度感知候选新闻}{20}{subsubsection.2.3.4}%
+\contentsline {subsection}{\numberline {2\,.\,4}模型评估}{22}{subsection.2.4}%
+\contentsline {subsubsection}{\numberline {2\,.\,4\,.\,1}与之前的模型指标对比}{22}{subsubsection.2.4.1}%
+\contentsline {subsubsection}{\numberline {2\,.\,4\,.\,2}消融实验}{22}{subsubsection.2.4.2}%
+\contentsline {section}{\numberline {三、}软件工程与开发架构方案}{23}{section.3}%
+\contentsline {subsection}{\numberline {3\,.\,1}开发工具与框架}{23}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3\,.\,2}新闻推荐系统软件落地示例}{23}{subsection.3.2}%
+\contentsline {subsubsection}{\numberline {3\,.\,2\,.\,1} 软件周期模型}{23}{subsubsection.3.2.1}%
+\contentsline {subsubsection}{\numberline {3\,.\,2\,.\,2} 软件开发模型}{25}{subsubsection.3.2.2}%
+\contentsline {subsubsection}{\numberline {3\,.\,2\,.\,3} 数据库设计}{27}{subsubsection.3.2.3}%
+\contentsline {subsubsection}{\numberline {3\,.\,2\,.\,4} UML设计}{30}{subsubsection.3.2.4}%
+\contentsline {subsubsection}{\numberline {3\,.\,2\,.\,5} 软件功能演示}{31}{subsubsection.3.2.5}%
+\contentsline {subsubsection}{\numberline {3\,.\,2\,.\,6} 兼容性测试与稳定性测试}{33}{subsubsection.3.2.6}%
+\contentsline {section}{\numberline {四、}商业模式构建与经营管理}{34}{section.4}%
+\contentsline {subsection}{\numberline {4\,.\,1}市场竞争分析（ 按照SWOT分析写，画一个图）}{34}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4\,.\,2}投资回报分析}{34}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4\,.\,3}盈利方式}{34}{subsection.4.3}%
+\contentsline {subsubsection}{\numberline {4\,.\,3\,.\,1} 提供整套低耦合工业界解决方案}{34}{subsubsection.4.3.1}%
+\contentsline {subsubsection}{\numberline {4\,.\,3\,.\,2} 提供整套成熟软件系统}{34}{subsubsection.4.3.2}%
+\contentsline {subsection}{\numberline {4\,.\,4}财务管理}{34}{subsection.4.4}%
+\contentsline {subsection}{\numberline {4\,.\,5}营销战略}{34}{subsection.4.5}%
+\contentsline {section}{参考文献}{35}{section*.31}%

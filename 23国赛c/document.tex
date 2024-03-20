@@ -144,10 +144,35 @@
 	\section{模型技术路线及实现方案}
 	\subsection{数据集选取}
 	\subsubsection{ MIND数据集}
+	MIND是微软在2020年发布的公开数据集（https://msnews.github.io/index.html），其包含了2230000条用户行为记录。MIND是目前新闻推荐算法研究领域应用最广泛的大规模数据集，主要包含behaviors.tsv和news.tsv这2个文件。behaviors.tsv收集了微软新闻平台下匿名用户的行为日志，news.tsv为新闻文章的文本信息。MIND数据集有2个版本：MIND-small和MIND-large。本项目所有研究采用MIND-small数据集，MIND-small数据集是在MIND上随机抽取的50000条记录，并且已经被划分为训练集和测试集。MIND-small中的每条用户行为记录包含了用户ID，用户点击过的新闻等信息。对于用户行为中涉及的所有新闻，MIND-small还提供了新闻对应的类别、标题、摘要、下载链接和实体等信息。
 	\subsubsection{ glove词嵌入}
+	我们采用Tensorflow用于模型实现，在我们的实验中，词嵌入是300维的，并且由glove词嵌入初始化。实验中只使用了新闻标题中的前30个单词和新闻中的前5个实体。从知识图中为每个实体选择10个邻居。实体嵌入是通过TransE从维基数据中提取的知识元组上的100维向量预训练。
 	\subsection{方法介绍}
 	\subsubsection{ 图神经网络}
+	与传统的神经网络采用网格状数据进行建模不同，图神经网络（GNN）可以采用图顶点展现更复杂的建模能力。图主要是由多个节点v和边E构成的，$\mathbf{G=(v,E)}$,设图G中某个顶点v所包含的特征状态为
+	\begin{equation}
+		\mathbf{h_v} = f(\mathbf{x_v},\mathbf{x_E},\mathbf{h}_v\textsuperscript{'},\mathbf{x}_v\textsuperscript{'})
+	\end{equation}
+	其中，$h_v$为v的特征状态；$x_v$为v的特征因子；$x_E$为连接边的特征因子； $\mathbf{h}_v\textsuperscript{'}$ 和 $\mathbf{x}_v\textsuperscript{'}$ 分别为v的相邻顶点
+	的状态输入和特征向量；f为过渡函数。
+	
+	根据顶点v的 $h_v$ 和 $x_v$ 值，将两者传输至输出函数g，得到顶点v的输出 $\mathbf{o_{v}}$，
+	\begin{equation}
+		\mathbf{o_v} = g(\mathbf{h_v,x_v})
+	\end{equation}
+	
+	设H和X分别表示图顶点的特征状态堆叠及特征因子堆叠，则经过全局过渡函数运算之后，即t+1轮迭代后，对每个顶点进行损失求解，得到总 GNN 的总损失值，计算方法为：
+	\begin{equation}
+		\mathbf{loss} = \mathbf{\sum_{v=1}^{p} t_v - o_v }
+	\end{equation}
+	式中：p为顶点总数；$t_v$为顶点v的实际值。
 	\subsubsection{ 注意力机制}
+	自注意力机制适用于处理序列数据。通过自注意力机制，模型能够根据输入序列中不同位置的相关性动态地学习每个位置的表示，并将这些表示结合起来以形成最终的序列表示。这种机制使得模型能够捕获长距离依赖关系，避免了传统循环神经网络（RNN）中存在的梯度消失或爆炸问题。通过这种方式，自注意力机制提高了模型对全局上下文的理解能力，提升了模型在各种自然语言处理任务中的表现。在Transformer等基于注意力机制的模型中，自注意力机制被广泛应用，并取得了在机器翻译、文本生成等任务中的显著成果，成为当前深度学习领域中备受关注的技术之一。
+	通过引入注意力机制，我们的模型能够以更加灵活的方式对输入序列进行建模，并且能够动态地调整对不同部分的关注程度。这一点对于处理长序列数据尤为重要，因为传统的固定权重机制往往无法有效捕捉到序列中不同部分之间的复杂关联。我们按照以下公式计算注意力权重：
+	\begin{equation}
+		\mathbf{u}_w = \text{softmax}(\mathbf{W} \cdot \hat{G}^T + \mathbf{b}) \cdot \hat{G} 
+	\end{equation}
+	其中，$\hat{G}$ 表示用户兴趣的表示，$\mathbf{W}$ 和 $\mathbf{b}$ 是模型参数。这个公式的核心是通过对用户兴趣表示进行加权求和，从而得到最终的用户兴趣表示。这种动态的注意力权重计算方式使得模型能够更加准确地捕捉到用户兴趣的细微变化，从而提高了模型的表达能力和泛化能力。
 	\subsubsection{ Transformer }
 	Transformer是一种基于自注意力机制的神经网络，与传统的 RNN 和 CNN 不同，Transformer  网络没有循环和卷积结构，因此能够并行处理序列中的每个元素，加快训练和推理速度,具有良好的特征提取能力,其网络结构如图8所示。
 	\begin{figure}[H]
